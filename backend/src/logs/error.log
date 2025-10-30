@@ -1,0 +1,12 @@
+[2025-10-30T16:10:40.597Z] ERROR: option maxAge is invalid TypeError: option maxAge is invalid
+    at Object.serialize (D:\backend Projects\chat app MERN\backend\node_modules\cookie\index.js:209:13)
+    at res.cookie (D:\backend Projects\chat app MERN\backend\node_modules\express\lib\response.js:777:36)
+    at createToken (D:\backend Projects\chat app MERN\backend\src\utils\createToken.js:8:7)
+    at D:\backend Projects\chat app MERN\backend\src\controllers\auth.controller.js:20:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[2025-10-30T16:12:00.521Z] ERROR: option maxAge is invalid TypeError: option maxAge is invalid
+    at Object.serialize (D:\backend Projects\chat app MERN\backend\node_modules\cookie\index.js:209:13)
+    at res.cookie (D:\backend Projects\chat app MERN\backend\node_modules\express\lib\response.js:777:36)
+    at createToken (D:\backend Projects\chat app MERN\backend\src\utils\createToken.js:8:7)
+    at D:\backend Projects\chat app MERN\backend\src\controllers\auth.controller.js:20:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
