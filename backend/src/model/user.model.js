@@ -41,4 +41,28 @@ userSchema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, 12);
 });
 
+// ✅ Compare passwords during login
+userSchema.methods.correctPassword = async function (
+  enteredPassword,
+  userPassword
+) {
+  // 1️⃣ Check if both passwords are provided
+  if (!enteredPassword || !userPassword) {
+    throw new Error(
+      "Both entered and stored passwords are required for comparison."
+    );
+  }
+
+  // 2️⃣ Ensure they are strings
+  if (typeof enteredPassword !== "string" || typeof userPassword !== "string") {
+    throw new Error("Passwords must be strings.");
+  }
+
+  // 3️⃣ Compare passwords securely using bcrypt
+  const isMatch = await bcrypt.compare(enteredPassword, userPassword);
+
+  // 4️⃣ Return boolean result
+  return isMatch;
+};
+
 module.exports = mongoose.model("User", userSchema);

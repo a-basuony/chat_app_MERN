@@ -10,3 +10,14 @@
     at createToken (D:\backend Projects\chat app MERN\backend\src\utils\createToken.js:8:7)
     at D:\backend Projects\chat app MERN\backend\src\controllers\auth.controller.js:20:17
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[2025-10-30T23:39:23.641Z] ERROR: Route not found: /api/auth/login Error: Route not found: /api/auth/login
+    at notFound (D:\backend Projects\chat app MERN\backend\src\middlewares\globalErrorMiddleware.js:5:8)
+    at Layer.handleRequest (D:\backend Projects\chat app MERN\backend\node_modules\router\lib\layer.js:152:17)
+    at trimPrefix (D:\backend Projects\chat app MERN\backend\node_modules\router\index.js:342:13)
+    at D:\backend Projects\chat app MERN\backend\node_modules\router\index.js:297:9
+    at processParams (D:\backend Projects\chat app MERN\backend\node_modules\router\index.js:582:12)
+    at next (D:\backend Projects\chat app MERN\backend\node_modules\router\index.js:291:5)
+    at D:\backend Projects\chat app MERN\backend\node_modules\router\index.js:688:15
+    at next (D:\backend Projects\chat app MERN\backend\node_modules\router\index.js:276:14)
+    at Function.handle (D:\backend Projects\chat app MERN\backend\node_modules\router\index.js:186:3)
+    at router (D:\backend Projects\chat app MERN\backend\node_modules\router\index.js:60:12)
