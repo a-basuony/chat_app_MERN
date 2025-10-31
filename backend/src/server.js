@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
+const cookieParser = require("cookie-parser");
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/auth.route");
 const {
@@ -20,6 +21,7 @@ if (process.env.NODE_ENV === "development") {
 
 app.use(express.json()); // parse Json body
 // app.use(express.urlencoded({ extended: false })); // parse urlencoded body
+app.use(cookieParser());
 
 // routes
 app.use("/api/auth", authRoutes);

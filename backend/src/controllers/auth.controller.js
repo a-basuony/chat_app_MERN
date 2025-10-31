@@ -94,3 +94,8 @@ exports.logout = (req, res, next) => {
   });
   res.status(200).json({ message: "Logout successful", status: "success" });
 };
+
+// @desc    Update user profile
+// @route   PUT /api/auth/update-profile
+// @access  Private
+exports.updateProfile = expressAsyncHandler(async (req, res, next) => {});

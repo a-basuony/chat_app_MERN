@@ -8,8 +8,9 @@ const {
 const router = express.Router();
 
 router.route("/signup").post(signupValidator, signup);
-
 router.post("/login", loginValidator, login);
 router.post("/logout", logout); // we use post method for logout because it the best practice
+
+// router.put("/update-profile");
 
 module.exports = router;
