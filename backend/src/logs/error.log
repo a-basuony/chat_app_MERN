@@ -30,3 +30,36 @@
 [2025-11-01T14:29:00.106Z] ERROR: Image upload failed. Please try again. Error: Image upload failed. Please try again.
     at D:\backend Projects\chat app MERN\backend\src\controllers\auth.controller.js:145:19
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[2025-11-01T14:38:51.194Z] ERROR: Not authorized to access this route, no token provided Error: Not authorized to access this route, no token provided
+    at exports.protect (D:\backend Projects\chat app MERN\backend\src\middlewares\authMiddleware.js:14:9)
+    at Layer.handleRequest (D:\backend Projects\chat app MERN\backend\node_modules\router\lib\layer.js:152:17)
+    at next (D:\backend Projects\chat app MERN\backend\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (D:\backend Projects\chat app MERN\backend\node_modules\router\lib\route.js:117:3)
+    at handle (D:\backend Projects\chat app MERN\backend\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (D:\backend Projects\chat app MERN\backend\node_modules\router\lib\layer.js:152:17)
+    at D:\backend Projects\chat app MERN\backend\node_modules\router\index.js:295:15
+    at processParams (D:\backend Projects\chat app MERN\backend\node_modules\router\index.js:582:12)
+    at next (D:\backend Projects\chat app MERN\backend\node_modules\router\index.js:291:5)
+    at Function.handle (D:\backend Projects\chat app MERN\backend\node_modules\router\index.js:186:3)
+[2025-11-01T16:25:42.491Z] ERROR: Route not found: /favicon.ico Error: Route not found: /favicon.ico
+    at notFound (D:\backend Projects\chat app MERN\backend\src\middlewares\globalErrorMiddleware.js:5:8)
+    at Layer.handleRequest (D:\backend Projects\chat app MERN\backend\node_modules\router\lib\layer.js:152:17)
+    at trimPrefix (D:\backend Projects\chat app MERN\backend\node_modules\router\index.js:342:13)
+    at D:\backend Projects\chat app MERN\backend\node_modules\router\index.js:297:9
+    at processParams (D:\backend Projects\chat app MERN\backend\node_modules\router\index.js:582:12)
+    at next (D:\backend Projects\chat app MERN\backend\node_modules\router\index.js:291:5)
+    at cookieParser (D:\backend Projects\chat app MERN\backend\node_modules\cookie-parser\index.js:57:14)
+    at Layer.handleRequest (D:\backend Projects\chat app MERN\backend\node_modules\router\lib\layer.js:152:17)
+    at trimPrefix (D:\backend Projects\chat app MERN\backend\node_modules\router\index.js:342:13)
+    at D:\backend Projects\chat app MERN\backend\node_modules\router\index.js:297:9
+[2025-11-01T16:29:31.417Z] ERROR: Route not found: / Error: Route not found: /
+    at notFound (D:\backend Projects\chat app MERN\backend\src\middlewares\globalErrorMiddleware.js:5:8)
+    at Layer.handleRequest (D:\backend Projects\chat app MERN\backend\node_modules\router\lib\layer.js:152:17)
+    at trimPrefix (D:\backend Projects\chat app MERN\backend\node_modules\router\index.js:342:13)
+    at D:\backend Projects\chat app MERN\backend\node_modules\router\index.js:297:9
+    at processParams (D:\backend Projects\chat app MERN\backend\node_modules\router\index.js:582:12)
+    at next (D:\backend Projects\chat app MERN\backend\node_modules\router\index.js:291:5)
+    at cookieParser (D:\backend Projects\chat app MERN\backend\node_modules\cookie-parser\index.js:57:14)
+    at Layer.handleRequest (D:\backend Projects\chat app MERN\backend\node_modules\router\lib\layer.js:152:17)
+    at trimPrefix (D:\backend Projects\chat app MERN\backend\node_modules\router\index.js:342:13)
+    at D:\backend Projects\chat app MERN\backend\node_modules\router\index.js:297:9
