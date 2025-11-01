@@ -2,6 +2,7 @@ const expressAsyncHandler = require("express-async-handler");
 const ApiError = require("../utils/ApiError");
 const User = require("../model/user.model");
 const createToken = require("../utils/createToken");
+const cloudinary = require("../config/cloudinary");
 const {
   sendWelcomeEmail,
   sendLoginNotificationEmail,
@@ -98,4 +99,66 @@ exports.logout = (req, res, next) => {
 // @desc    Update user profile
 // @route   PUT /api/auth/update-profile
 // @access  Private
-exports.updateProfile = expressAsyncHandler(async (req, res, next) => {});
+exports.updateProfile = expressAsyncHandler(async (req, res, next) => {
+  const userId = req.user._id;
+  const { name, email, phone } = req.body;
+
+  // ✅ Convert file buffer to base64 (for Cloudinary)
+  const profileImage =
+    req.body.profileImage ||
+    (req.file
+      ? `data:${req.file.mimetype};base64,${req.file.buffer.toString("base64")}`
+      : null);
+
+  // 1️⃣ Find user
+  const user = await User.findById(userId);
+  if (!user) return next(new ApiError("User not found", 404));
+
+  // 2️⃣ Update basic fields (if provided)
+  if (name) user.name = name;
+  if (email) user.email = email;
+  if (phone) user.phone = phone;
+
+  console.log("Uploading image...", profileImage ? "✅ found" : "❌ missing");
+
+  // 3️⃣ Handle profile image upload
+  if (profileImage) {
+    try {
+      // 3.1️⃣ Delete old image from Cloudinary (if exists)
+      if (user.profileImage) {
+        const oldPublicId = user.profileImage.split("/").pop().split(".")[0];
+        await cloudinary.uploader.destroy(
+          `users/profile_images/${oldPublicId}`
+        );
+      }
+
+      // 3.2️⃣ Upload new image
+      const uploadResponse = await cloudinary.uploader.upload(profileImage, {
+        folder: "users/profile_images",
+        public_id: `${user._id}_profile`,
+        overwrite: true,
+      });
+
+      user.profileImage = uploadResponse.secure_url;
+    } catch (error) {
+      console.error("❌ Cloudinary upload failed:", error.message, error);
+      return next(new ApiError("Image upload failed. Please try again.", 500));
+    }
+  }
+
+  // 4️⃣ Save updated user
+  await user.save();
+
+  // 5️⃣ Respond to client
+  res.status(200).json({
+    status: "success",
+    message: "Profile updated successfully",
+    data: {
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      phone: user.phone,
+      profileImage: user.profileImage,
+    },
+  });
+});

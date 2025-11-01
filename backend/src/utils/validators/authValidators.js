@@ -81,3 +81,40 @@ exports.loginValidator = [
     .withMessage("Password must be at least 6 characters long"),
   validatorMiddleware,
 ];
+
+exports.updateProfileValidator = [
+  check("name")
+    .trim()
+    .optional()
+    .isLength({ min: 3 })
+    .withMessage("Name must be at least 3 characters long")
+    .isLength({ max: 30 })
+    .withMessage("Name must be less than 30 characters long"),
+
+  check("email")
+    .trim()
+    .optional()
+    .isEmail()
+    .withMessage("Email is invalid")
+    .toLowerCase()
+    .custom(async (email) => {
+      const user = await User.findOne({ email });
+      if (user) {
+        throw new Error("Email already exists");
+      }
+      return true;
+    }),
+  check("phone")
+    .trim()
+    .optional()
+    .isMobilePhone("ar-EG ar-SA")
+    .withMessage("Phone number is invalid"),
+
+  check("profileImage")
+    .trim()
+    .optional()
+    .isURL()
+    .withMessage("Profile image must be a valid URL"),
+
+  validatorMiddleware,
+];

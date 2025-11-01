@@ -21,3 +21,12 @@
     at next (D:\backend Projects\chat app MERN\backend\node_modules\router\index.js:276:14)
     at Function.handle (D:\backend Projects\chat app MERN\backend\node_modules\router\index.js:186:3)
     at router (D:\backend Projects\chat app MERN\backend\node_modules\router\index.js:60:12)
+[2025-11-01T14:25:03.488Z] ERROR: Image upload failed. Please try again. Error: Image upload failed. Please try again.
+    at D:\backend Projects\chat app MERN\backend\src\controllers\auth.controller.js:143:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[2025-11-01T14:28:12.248Z] ERROR: Image upload failed. Please try again. Error: Image upload failed. Please try again.
+    at D:\backend Projects\chat app MERN\backend\src\controllers\auth.controller.js:145:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[2025-11-01T14:29:00.106Z] ERROR: Image upload failed. Please try again. Error: Image upload failed. Please try again.
+    at D:\backend Projects\chat app MERN\backend\src\controllers\auth.controller.js:145:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
