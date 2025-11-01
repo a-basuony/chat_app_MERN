@@ -26,6 +26,15 @@ router.put(
   upload.single("profileImage"), // ← Multer parses image here
   updateProfile
 );
+
+router.get("/check", protectRoute.protect, (req, res) => {
+  res.status(200).json({
+    status: "success",
+    data: {
+      user: req.user,
+    },
+  });
+});
 // router.put("/update-password", protectRoute.protect, updatePassword);
 
 module.exports = router;
