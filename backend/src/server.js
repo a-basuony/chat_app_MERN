@@ -2,9 +2,11 @@ const express = require("express");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
 const rateLimit = require("express-rate-limit");
+
 const cookieParser = require("cookie-parser");
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/auth.route");
+const messageRoutes = require("./routes/message.route");
 const {
   globalError,
   notFound,
@@ -37,6 +39,7 @@ app.use(cookieParser());
 
 // routes
 app.use("/api/auth", authRoutes);
+app.use("/api/messages", messageRoutes);
 
 // ✅ API routes (placeholder)
 app.get("/api/test", (req, res) => {
