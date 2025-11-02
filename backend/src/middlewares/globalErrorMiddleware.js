@@ -1,5 +1,4 @@
 const ApiError = require("../utils/apiError");
-const logger = require("../utils/logger"); // 👈 import logger
 
 const notFound = (req, res, next) => {
   next(new ApiError(`Route not found: ${req.originalUrl}`, 404));
@@ -11,23 +10,27 @@ const globalError = (err, req, res, next) => {
 
   const env = process.env.NODE_ENV || "development";
 
-  // Log every error
-  logger.error({
-    message: err.message,
-    stack: err.stack,
-    path: req.originalUrl,
-    method: req.method,
-    statusCode: err.statusCode,
-  });
+  // 🧠 Always print detailed error in console (for debugging)
+  console.error("🔥 ERROR DETAILS 🔥");
+  console.error("Message:", err.message);
+  console.error("Path:", req.originalUrl);
+  console.error("Method:", req.method);
+  console.error("Status Code:", err.statusCode);
+  console.error("Stack Trace:", err.stack);
+  console.error("--------------------------------------");
 
   if (env === "development") {
+    // 🧩 Send full details to client (useful in Postman/testing)
     res.status(err.statusCode).json({
       status: err.status,
       message: err.message,
+      path: req.originalUrl,
+      method: req.method,
       stack: err.stack,
       location: err.stack ? err.stack.split("\n")[1]?.trim() : "N/A",
     });
-  } else {
+  } else if (env === "production") {
+    // 🚨 Production mode: hide internal error details
     res.status(err.statusCode).json({
       status: err.status,
       message: err.isOperational

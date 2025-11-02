@@ -23,17 +23,17 @@ const messageSchema = new mongoose.Schema(
   }
 );
 
-// populate sender name and receiver name
-messageSchema.pre(/^find/, function (next) {
-  this.populate({
-    path: "senderId",
-    select: "name  email",
-  });
-  this.populate({
-    path: "receiverId",
-    select: "name  email",
-  });
-  next();
-});
+// // populate sender name and receiver name
+// messageSchema.pre(/^find/, function (next) {
+//   this.populate({
+//     path: "senderId",
+//     select: "name  email",
+//   });
+//   this.populate({
+//     path: "receiverId",
+//     select: "name  email",
+//   });
+//   next();
+// });
 
 module.exports = mongoose.model("Message", messageSchema);

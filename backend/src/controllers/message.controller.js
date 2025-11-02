@@ -5,6 +5,9 @@ const Message = require("../model/message.model");
 const ApiError = require("../utils/ApiError");
 const cloudinary = require("../config/cloudinary");
 
+// @desc    Get all contacts
+// @route   GET /api/messages
+// @access  Private
 exports.getAllContacts = expressAsyncHandler(async (req, res, next) => {
   const loggedUserId = req.user._id;
 
@@ -21,6 +24,9 @@ exports.getAllContacts = expressAsyncHandler(async (req, res, next) => {
   });
 });
 
+// @desc    Get all messages between two users
+// @route   GET /api/messages/:id
+// @access  Private
 exports.getMessagesByUserId = expressAsyncHandler(async (req, res, next) => {
   const myId = req.user._id;
   const { id: userToChatWithId } = req.params;
@@ -30,7 +36,9 @@ exports.getMessagesByUserId = expressAsyncHandler(async (req, res, next) => {
       { senderId: myId, receiverId: userToChatWithId },
       { senderId: userToChatWithId, receiverId: myId },
     ],
-  }).sort({ createdAt: 1 });
+  })
+    .sort({ createdAt: 1 })
+    .populate("senderId receiverId");
 
   if (messages.length === 0) {
     return next(new ApiError("No messages found", 404));
@@ -73,11 +81,49 @@ exports.sendMessage = expressAsyncHandler(async (req, res, next) => {
     text,
     image: imageUrl,
   });
-
+  // send message (real time using socket.io)
   // 3️⃣ Respond
   res.status(201).json({
     status: "success",
     message: "Message sent successfully",
     data: message,
+  });
+});
+
+// @desc    Get chat parteners
+// @route   GET /api/messages/chats
+// @access  Private
+exports.getChatPartners = expressAsyncHandler(async (req, res, next) => {
+  const myId = req.user._id;
+
+  //find all messages for logged-user both (sender or receiver)
+  const messages = await Message.find({
+    $or: [{ senderId: myId }, { receiverId: myId }],
+  });
+  if (messages.length === 0) {
+    return next(new ApiError("No messages found", 404));
+  }
+
+  const chatPartners = [
+    ...new Set(
+      messages.map((msg) =>
+        msg.senderId.toString() === myId.toString()
+          ? msg.receiverId.toString()
+          : msg.senderId.toString()
+      )
+    ),
+  ];
+
+  if (chatPartners.length === 0) {
+    return next(new ApiError("No chat parteners found", 404));
+  }
+
+  const filteredChatPartners = await User.find({
+    _id: { $in: chatPartners },
+  }).select("-password");
+
+  res.status(200).json({
+    status: "success",
+    data: filteredChatPartners,
   });
 });
