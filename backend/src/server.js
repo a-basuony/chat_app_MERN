@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
+const cors = require("cors");
 const rateLimit = require("express-rate-limit");
 
 const cookieParser = require("cookie-parser");
@@ -36,7 +37,7 @@ if (process.env.NODE_ENV === "development") {
 app.use(express.json()); // parse Json body
 app.use(express.urlencoded({ extended: true })); // parse urlencoded body
 app.use(cookieParser());
-
+app.use(cors({ credentials: true, origin: process.env.CLIENT_URL }));
 // routes
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
