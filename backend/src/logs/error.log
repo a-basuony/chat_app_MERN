@@ -63,3 +63,139 @@
     at Layer.handleRequest (D:\backend Projects\chat app MERN\backend\node_modules\router\lib\layer.js:152:17)
     at trimPrefix (D:\backend Projects\chat app MERN\backend\node_modules\router\index.js:342:13)
     at D:\backend Projects\chat app MERN\backend\node_modules\router\index.js:297:9
+[2025-11-02T14:47:44.157Z] ERROR: Cannot destructure property 'text' of 'req.body' as it is undefined. TypeError: Cannot destructure property 'text' of 'req.body' as it is undefined.
+    at D:\backend Projects\chat app MERN\backend\src\controllers\message.controller.js:46:11
+    at asyncUtilWrap (D:\backend Projects\chat app MERN\backend\node_modules\express-async-handler\index.js:3:20)
+    at Layer.handleRequest (D:\backend Projects\chat app MERN\backend\node_modules\router\lib\layer.js:152:17)
+    at next (D:\backend Projects\chat app MERN\backend\node_modules\router\lib\route.js:157:13)
+    at exports.protect (D:\backend Projects\chat app MERN\backend\src\middlewares\authMiddleware.js:28:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[2025-11-02T14:48:52.651Z] ERROR: Cannot destructure property 'text' of 'req.body' as it is undefined. TypeError: Cannot destructure property 'text' of 'req.body' as it is undefined.
+    at D:\backend Projects\chat app MERN\backend\src\controllers\message.controller.js:46:11
+    at asyncUtilWrap (D:\backend Projects\chat app MERN\backend\node_modules\express-async-handler\index.js:3:20)
+    at Layer.handleRequest (D:\backend Projects\chat app MERN\backend\node_modules\router\lib\layer.js:152:17)
+    at next (D:\backend Projects\chat app MERN\backend\node_modules\router\lib\route.js:157:13)
+    at exports.protect (D:\backend Projects\chat app MERN\backend\src\middlewares\authMiddleware.js:28:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[2025-11-02T14:48:54.488Z] ERROR: Cannot destructure property 'text' of 'req.body' as it is undefined. TypeError: Cannot destructure property 'text' of 'req.body' as it is undefined.
+    at D:\backend Projects\chat app MERN\backend\src\controllers\message.controller.js:46:11
+    at asyncUtilWrap (D:\backend Projects\chat app MERN\backend\node_modules\express-async-handler\index.js:3:20)
+    at Layer.handleRequest (D:\backend Projects\chat app MERN\backend\node_modules\router\lib\layer.js:152:17)
+    at next (D:\backend Projects\chat app MERN\backend\node_modules\router\lib\route.js:157:13)
+    at exports.protect (D:\backend Projects\chat app MERN\backend\src\middlewares\authMiddleware.js:28:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[2025-11-02T14:50:05.992Z] ERROR: Cannot destructure property 'text' of 'req.body' as it is undefined. TypeError: Cannot destructure property 'text' of 'req.body' as it is undefined.
+    at D:\backend Projects\chat app MERN\backend\src\controllers\message.controller.js:46:11
+    at asyncUtilWrap (D:\backend Projects\chat app MERN\backend\node_modules\express-async-handler\index.js:3:20)
+    at Layer.handleRequest (D:\backend Projects\chat app MERN\backend\node_modules\router\lib\layer.js:152:17)
+    at next (D:\backend Projects\chat app MERN\backend\node_modules\router\lib\route.js:157:13)
+    at exports.protect (D:\backend Projects\chat app MERN\backend\src\middlewares\authMiddleware.js:28:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[2025-11-02T14:50:09.635Z] ERROR: Cannot destructure property 'text' of 'req.body' as it is undefined. TypeError: Cannot destructure property 'text' of 'req.body' as it is undefined.
+    at D:\backend Projects\chat app MERN\backend\src\controllers\message.controller.js:46:11
+    at asyncUtilWrap (D:\backend Projects\chat app MERN\backend\node_modules\express-async-handler\index.js:3:20)
+    at Layer.handleRequest (D:\backend Projects\chat app MERN\backend\node_modules\router\lib\layer.js:152:17)
+    at next (D:\backend Projects\chat app MERN\backend\node_modules\router\lib\route.js:157:13)
+    at exports.protect (D:\backend Projects\chat app MERN\backend\src\middlewares\authMiddleware.js:28:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[2025-11-02T14:50:30.202Z] ERROR: Cannot destructure property 'text' of 'req.body' as it is undefined. TypeError: Cannot destructure property 'text' of 'req.body' as it is undefined.
+    at D:\backend Projects\chat app MERN\backend\src\controllers\message.controller.js:46:11
+    at asyncUtilWrap (D:\backend Projects\chat app MERN\backend\node_modules\express-async-handler\index.js:3:20)
+    at Layer.handleRequest (D:\backend Projects\chat app MERN\backend\node_modules\router\lib\layer.js:152:17)
+    at next (D:\backend Projects\chat app MERN\backend\node_modules\router\lib\route.js:157:13)
+    at exports.protect (D:\backend Projects\chat app MERN\backend\src\middlewares\authMiddleware.js:28:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[2025-11-02T14:55:58.645Z] ERROR: Cannot destructure property 'text' of 'req.body' as it is undefined. TypeError: Cannot destructure property 'text' of 'req.body' as it is undefined.
+    at D:\backend Projects\chat app MERN\backend\src\controllers\message.controller.js:46:11
+    at asyncUtilWrap (D:\backend Projects\chat app MERN\backend\node_modules\express-async-handler\index.js:3:20)
+    at Layer.handleRequest (D:\backend Projects\chat app MERN\backend\node_modules\router\lib\layer.js:152:17)
+    at next (D:\backend Projects\chat app MERN\backend\node_modules\router\lib\route.js:157:13)
+    at exports.protect (D:\backend Projects\chat app MERN\backend\src\middlewares\authMiddleware.js:28:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[2025-11-02T14:56:38.762Z] ERROR: Cannot destructure property 'text' of 'req.body' as it is undefined. TypeError: Cannot destructure property 'text' of 'req.body' as it is undefined.
+    at D:\backend Projects\chat app MERN\backend\src\controllers\message.controller.js:46:11
+    at asyncUtilWrap (D:\backend Projects\chat app MERN\backend\node_modules\express-async-handler\index.js:3:20)
+    at Layer.handleRequest (D:\backend Projects\chat app MERN\backend\node_modules\router\lib\layer.js:152:17)
+    at next (D:\backend Projects\chat app MERN\backend\node_modules\router\lib\route.js:157:13)
+    at exports.protect (D:\backend Projects\chat app MERN\backend\src\middlewares\authMiddleware.js:28:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[2025-11-02T14:56:52.246Z] ERROR: Cannot destructure property 'text' of 'req.body' as it is undefined. TypeError: Cannot destructure property 'text' of 'req.body' as it is undefined.
+    at D:\backend Projects\chat app MERN\backend\src\controllers\message.controller.js:46:11
+    at asyncUtilWrap (D:\backend Projects\chat app MERN\backend\node_modules\express-async-handler\index.js:3:20)
+    at Layer.handleRequest (D:\backend Projects\chat app MERN\backend\node_modules\router\lib\layer.js:152:17)
+    at next (D:\backend Projects\chat app MERN\backend\node_modules\router\lib\route.js:157:13)
+    at exports.protect (D:\backend Projects\chat app MERN\backend\src\middlewares\authMiddleware.js:28:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[2025-11-02T14:56:53.930Z] ERROR: Cannot destructure property 'text' of 'req.body' as it is undefined. TypeError: Cannot destructure property 'text' of 'req.body' as it is undefined.
+    at D:\backend Projects\chat app MERN\backend\src\controllers\message.controller.js:46:11
+    at asyncUtilWrap (D:\backend Projects\chat app MERN\backend\node_modules\express-async-handler\index.js:3:20)
+    at Layer.handleRequest (D:\backend Projects\chat app MERN\backend\node_modules\router\lib\layer.js:152:17)
+    at next (D:\backend Projects\chat app MERN\backend\node_modules\router\lib\route.js:157:13)
+    at exports.protect (D:\backend Projects\chat app MERN\backend\src\middlewares\authMiddleware.js:28:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[2025-11-02T14:59:10.739Z] ERROR: Field name missing MulterError: Field name missing
+    at abortWithCode (D:\backend Projects\chat app MERN\backend\node_modules\multer\lib\make-middleware.js:85:22)
+    at Multipart.<anonymous> (D:\backend Projects\chat app MERN\backend\node_modules\multer\lib\make-middleware.js:113:37)
+    at Multipart.emit (node:events:519:28)
+    at HeaderParser.cb (D:\backend Projects\chat app MERN\backend\node_modules\busboy\lib\types\multipart.js:358:14)
+    at HeaderParser.push (D:\backend Projects\chat app MERN\backend\node_modules\busboy\lib\types\multipart.js:162:20)
+    at SBMH.ssCb [as _cb] (D:\backend Projects\chat app MERN\backend\node_modules\busboy\lib\types\multipart.js:394:37)
+    at feed (D:\backend Projects\chat app MERN\backend\node_modules\streamsearch\lib\sbmh.js:200:10)
+    at SBMH.push (D:\backend Projects\chat app MERN\backend\node_modules\streamsearch\lib\sbmh.js:104:16)
+    at Multipart._write (D:\backend Projects\chat app MERN\backend\node_modules\busboy\lib\types\multipart.js:567:19)
+    at writeOrBuffer (node:internal/streams/writable:572:12)
+[2025-11-02T14:59:14.174Z] ERROR: Field name missing MulterError: Field name missing
+    at abortWithCode (D:\backend Projects\chat app MERN\backend\node_modules\multer\lib\make-middleware.js:85:22)
+    at Multipart.<anonymous> (D:\backend Projects\chat app MERN\backend\node_modules\multer\lib\make-middleware.js:113:37)
+    at Multipart.emit (node:events:519:28)
+    at HeaderParser.cb (D:\backend Projects\chat app MERN\backend\node_modules\busboy\lib\types\multipart.js:358:14)
+    at HeaderParser.push (D:\backend Projects\chat app MERN\backend\node_modules\busboy\lib\types\multipart.js:162:20)
+    at SBMH.ssCb [as _cb] (D:\backend Projects\chat app MERN\backend\node_modules\busboy\lib\types\multipart.js:394:37)
+    at feed (D:\backend Projects\chat app MERN\backend\node_modules\streamsearch\lib\sbmh.js:200:10)
+    at SBMH.push (D:\backend Projects\chat app MERN\backend\node_modules\streamsearch\lib\sbmh.js:104:16)
+    at Multipart._write (D:\backend Projects\chat app MERN\backend\node_modules\busboy\lib\types\multipart.js:567:19)
+    at writeOrBuffer (node:internal/streams/writable:572:12)
+[2025-11-02T15:04:17.964Z] ERROR: Field name missing MulterError: Field name missing
+    at abortWithCode (D:\backend Projects\chat app MERN\backend\node_modules\multer\lib\make-middleware.js:85:22)
+    at Multipart.<anonymous> (D:\backend Projects\chat app MERN\backend\node_modules\multer\lib\make-middleware.js:113:37)
+    at Multipart.emit (node:events:519:28)
+    at HeaderParser.cb (D:\backend Projects\chat app MERN\backend\node_modules\busboy\lib\types\multipart.js:358:14)
+    at HeaderParser.push (D:\backend Projects\chat app MERN\backend\node_modules\busboy\lib\types\multipart.js:162:20)
+    at SBMH.ssCb [as _cb] (D:\backend Projects\chat app MERN\backend\node_modules\busboy\lib\types\multipart.js:394:37)
+    at feed (D:\backend Projects\chat app MERN\backend\node_modules\streamsearch\lib\sbmh.js:219:14)
+    at SBMH.push (D:\backend Projects\chat app MERN\backend\node_modules\streamsearch\lib\sbmh.js:104:16)
+    at Multipart._write (D:\backend Projects\chat app MERN\backend\node_modules\busboy\lib\types\multipart.js:567:19)
+    at writeOrBuffer (node:internal/streams/writable:572:12)
+[2025-11-02T15:08:31.996Z] ERROR: Field name missing MulterError: Field name missing
+    at abortWithCode (D:\backend Projects\chat app MERN\backend\node_modules\multer\lib\make-middleware.js:85:22)
+    at Multipart.<anonymous> (D:\backend Projects\chat app MERN\backend\node_modules\multer\lib\make-middleware.js:113:37)
+    at Multipart.emit (node:events:519:28)
+    at HeaderParser.cb (D:\backend Projects\chat app MERN\backend\node_modules\busboy\lib\types\multipart.js:358:14)
+    at HeaderParser.push (D:\backend Projects\chat app MERN\backend\node_modules\busboy\lib\types\multipart.js:162:20)
+    at SBMH.ssCb [as _cb] (D:\backend Projects\chat app MERN\backend\node_modules\busboy\lib\types\multipart.js:394:37)
+    at feed (D:\backend Projects\chat app MERN\backend\node_modules\streamsearch\lib\sbmh.js:219:14)
+    at SBMH.push (D:\backend Projects\chat app MERN\backend\node_modules\streamsearch\lib\sbmh.js:104:16)
+    at Multipart._write (D:\backend Projects\chat app MERN\backend\node_modules\busboy\lib\types\multipart.js:567:19)
+    at writeOrBuffer (node:internal/streams/writable:572:12)
+[2025-11-02T15:08:35.998Z] ERROR: Field name missing MulterError: Field name missing
+    at abortWithCode (D:\backend Projects\chat app MERN\backend\node_modules\multer\lib\make-middleware.js:85:22)
+    at Multipart.<anonymous> (D:\backend Projects\chat app MERN\backend\node_modules\multer\lib\make-middleware.js:113:37)
+    at Multipart.emit (node:events:519:28)
+    at HeaderParser.cb (D:\backend Projects\chat app MERN\backend\node_modules\busboy\lib\types\multipart.js:358:14)
+    at HeaderParser.push (D:\backend Projects\chat app MERN\backend\node_modules\busboy\lib\types\multipart.js:162:20)
+    at SBMH.ssCb [as _cb] (D:\backend Projects\chat app MERN\backend\node_modules\busboy\lib\types\multipart.js:394:37)
+    at feed (D:\backend Projects\chat app MERN\backend\node_modules\streamsearch\lib\sbmh.js:200:10)
+    at SBMH.push (D:\backend Projects\chat app MERN\backend\node_modules\streamsearch\lib\sbmh.js:104:16)
+    at Multipart._write (D:\backend Projects\chat app MERN\backend\node_modules\busboy\lib\types\multipart.js:567:19)
+    at writeOrBuffer (node:internal/streams/writable:572:12)
+[2025-11-02T15:09:06.064Z] ERROR: Field name missing MulterError: Field name missing
+    at abortWithCode (D:\backend Projects\chat app MERN\backend\node_modules\multer\lib\make-middleware.js:85:22)
+    at Multipart.<anonymous> (D:\backend Projects\chat app MERN\backend\node_modules\multer\lib\make-middleware.js:113:37)
+    at Multipart.emit (node:events:519:28)
+    at HeaderParser.cb (D:\backend Projects\chat app MERN\backend\node_modules\busboy\lib\types\multipart.js:358:14)
+    at HeaderParser.push (D:\backend Projects\chat app MERN\backend\node_modules\busboy\lib\types\multipart.js:162:20)
+    at SBMH.ssCb [as _cb] (D:\backend Projects\chat app MERN\backend\node_modules\busboy\lib\types\multipart.js:394:37)
+    at feed (D:\backend Projects\chat app MERN\backend\node_modules\streamsearch\lib\sbmh.js:219:14)
+    at SBMH.push (D:\backend Projects\chat app MERN\backend\node_modules\streamsearch\lib\sbmh.js:104:16)
+    at Multipart._write (D:\backend Projects\chat app MERN\backend\node_modules\busboy\lib\types\multipart.js:567:19)
+    at writeOrBuffer (node:internal/streams/writable:572:12)

@@ -34,7 +34,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 app.use(express.json()); // parse Json body
-// app.use(express.urlencoded({ extended: false })); // parse urlencoded body
+app.use(express.urlencoded({ extended: true })); // parse urlencoded body
 app.use(cookieParser());
 
 // routes
