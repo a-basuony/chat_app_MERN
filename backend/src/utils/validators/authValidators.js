@@ -40,12 +40,7 @@ exports.signupValidator = [
     .withMessage("Password is required")
     .isLength({ min: 6 })
     .withMessage("Password must be at least 6 characters long")
-    .custom(async (val, { req }) => {
-      if (val !== req.body.confirmPassword) {
-        throw new Error("Passwords do not match");
-      }
-      return true;
-    }),
+ ,
 
   check("confirmPassword")
     .if(check("password").exists())
@@ -53,7 +48,12 @@ exports.signupValidator = [
     .notEmpty()
     .withMessage("Confirm Password is required")
     .isLength({ min: 6 })
-    .withMessage("Confirm Password must be at least 6 characters long"),
+    .withMessage("Confirm Password must be at least 6 characters long")   .custom(async (val, { req }) => {
+      if (val !== req.body.password) {
+        throw new Error("Passwords do not match");
+      }
+      return true;
+    }),
   validatorMiddleware,
 ];
 

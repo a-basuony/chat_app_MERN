@@ -30,8 +30,17 @@ const useAuthStore = create((set) => ({
     } catch (error) {
       console.log("Error in signup:", error);
       set({ isSigningUP: false });
-      toast.error(error.response?.data?.message || "Signup failed!");
-    }
+const errRes = error.response?.data;
+
+    // If there are validation errors, show the first one
+        if (errRes?.errors?.length) {
+          toast.error(errRes.errors[0].msg);
+        } else if (errRes?.message) {
+          toast.error(errRes.message);
+        } else {
+          toast.error("Something went wrong!");
+        }    
+      }
   },
 }));
 
