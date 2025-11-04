@@ -66,6 +66,18 @@ const useAuthStore = create((set) => ({
     }
     }
   },
+
+  // ✅ Logout
+  logout: async () => {
+    try {
+      await api.post("/auth/logout"); // your backend route
+      set({ authUser: null });
+      toast.success("Logout successful!");
+    } catch (error) {
+      console.log("Error in logout:", error);
+      toast.error("Logout failed!");
+    }
+  },
 }));
 
 export default useAuthStore;

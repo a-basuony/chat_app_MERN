@@ -68,7 +68,7 @@ const LoginPage = () => {
             className="auth-btn flex items-center justify-center" 
             disabled={isLoggingIn}
           >
-            {isLoggingIn ? (<Loader className="w-5 h-5 animate-spin "/>) : ("Create Account")}
+            {isLoggingIn ? (<Loader className="w-5 h-5 animate-spin "/>) : ("Login to your account")}
           </button>
         </form>
         <div className="mt-6 text-center">
