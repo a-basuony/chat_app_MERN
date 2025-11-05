@@ -1,4 +1,6 @@
 import {create } from "zustand";
+import api from "../api/axios";
+import toast from "react-hot-toast";
 
 export const useChatStore = create((set, get) => ({
     allContacts: [],
@@ -23,10 +25,12 @@ export const useChatStore = create((set, get) => ({
     getAllContacts: async () => {
         set({ isUsersLoading: true });
         try {
-            const res = await api.get("/messages"); // your backend route
+            const res = await api.get("/messages");// get all contacts // your backend route
             set({ allContacts: res.data });
         } catch (error) {
             console.log("Error in getAllContacts:", error);
+            toast.error(error.response.data.message);
+
         } finally {
             set({ isUsersLoading: false });
         }
@@ -34,10 +38,11 @@ export const useChatStore = create((set, get) => ({
     getAllChatPartners: async () => {
         set({ isUsersLoading: true });
         try {
-            const res = await api.get("/messages"); // your backend route
+            const res = await api.get("/messages/chats"); // your backend route
             set({ allContacts: res.data });
         } catch (error) {
             console.log("Error in getAllContacts:", error);
+            toast.error(error.response.data.message);
         } finally {
             set({ isUsersLoading: false });
         }2
