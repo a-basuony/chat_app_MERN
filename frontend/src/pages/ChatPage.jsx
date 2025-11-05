@@ -6,6 +6,7 @@ import ChatList from "../components/ChatList";
 import ContactsList from "../components/ContactsList";
 import ChatContainer from "../components/ChatContainer";
 import NoConversationPlaceholder from './../components/NoConversationPlaceholder';
+import BorderAnimatedContainer from './../components/BorderAnimatedContainer';
 
 const ChatPage = () => {
   const {activeTab, selectedUser} = useChatStore()

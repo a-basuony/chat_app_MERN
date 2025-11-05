@@ -4,6 +4,7 @@ const {
   logout,
   signup,
   updateProfile,
+  checkAuth,
 } = require("../controllers/auth.controller");
 const {
   signupValidator,
@@ -27,14 +28,8 @@ router.put(
   updateProfile
 );
 
-router.get("/check", protectRoute.protect, (req, res) => {
-  res.status(200).json({
-    status: "success",
-    data: {
-      user: req.user,
-    },
-  });
-});
+router.get("/check", protectRoute.protect,checkAuth);
+
 // router.put("/update-password", protectRoute.protect, updatePassword);
 
 module.exports = router;

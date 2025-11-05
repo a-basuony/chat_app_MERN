@@ -11,7 +11,7 @@ const createToken = (id, res) => {
   res.cookie("jwt", token, {
     maxAge: days * 24 * 60 * 60 * 1000,
     httpOnly: true, // prevent xss attacks: cross-site scripting,
-    sameSite: "strict", // CSRF attacks
+  sameSite:  "strict",
     secure: process.env.NODE_ENV === "development" ? false : true,
   });
 

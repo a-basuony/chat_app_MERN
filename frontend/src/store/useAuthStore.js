@@ -14,7 +14,7 @@ const useAuthStore = create((set) => ({
     set({ isCheckingAuth: true });
     try {
       const res = await api.get("/auth/check"); // your backend route
-      set({ authUser: res.data.user, isCheckingAuth: false });
+      set({ authUser: res.data.data.user, isCheckingAuth: false });
     } catch (error) {
       console.log("Error in checkAuth:", error);
       set({ authUser: null, isCheckingAuth: false });

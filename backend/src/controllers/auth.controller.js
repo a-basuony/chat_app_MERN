@@ -83,6 +83,25 @@ exports.login = expressAsyncHandler(async (req, res, next) => {
   });
 });
 
+// @desc    check auth
+// @route   POST /api/auth/check
+// @access  Public
+// controllers/authController.js
+exports.checkAuth = (req, res) => {
+  res.status(200).json({
+    status: "success",
+    data: {
+      user: {
+        _id: req.user._id,
+        name: req.user.name,
+        email: req.user.email,
+        profileImage: req.user.profileImage,
+      },
+    },
+  });
+};
+
+
 // @desc    Logout user
 // @route   POST /api/auth/logout
 // @access  Public
