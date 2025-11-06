@@ -6,7 +6,7 @@ import { LogOutIcon, Volume2Icon, VolumeOffIcon } from 'lucide-react';
 const mouseClickSound= new Audio("/sounds/mouse-click.mp3")
 
 const ProfileHeader = () => {
-  const { logout, authUser } = useAuthStore();
+  const { logout, authUser, updateProfile } = useAuthStore();
   const { isSoundEnabled, toggleSound } = useChatStore();
 
   const [selectedImg, setSelectedImg] = useState(null); // ✅ fixed
@@ -16,6 +16,15 @@ const ProfileHeader = () => {
     const file = e.target.files[0];
     if (file) {
       setSelectedImg(URL.createObjectURL(file)); // Optional: preview image
+      const reader = new FileReader()
+      reader.readAsDataURL(file)
+      reader.onloadend = async() => {
+        const base64Image = reader.result;
+        setSelectedImg(base64Image)
+        await updateProfile({ profilePic: base64Image })
+      }
+    }else{
+      return;
     }
   };
 

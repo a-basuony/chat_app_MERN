@@ -11,7 +11,7 @@ export const useChatStore = create((set, get) => ({
     isUsersLoading: false,
     isMessagesLoading: false,
     // get it from local storage
-    isSoundEnabled: localStorage.getItem("isSoundEnabled") === "true",
+    isSoundEnabled: JSON.parse(localStorage.getItem("isSoundEnabled") )=== true, // or without JSON.parse() but it will be a string === "true" as string
 
     toggleSound: () =>{
         // update local storage and state

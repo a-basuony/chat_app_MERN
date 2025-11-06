@@ -78,6 +78,25 @@ const useAuthStore = create((set) => ({
       toast.error("Logout failed!");
     }
   },
+
+  // ✅ Update User
+  updateProfile: async (data) => {
+    try {
+      const res = await api.put("/auth/update-profile", data); // your backend route
+      set({ authUser: res.data });
+      toast.success("Profile updated successfully!");
+    } catch (error) {
+      console.log("Error in updateUser:", error);
+      const errRes = error.response?.data;
+      if (errRes?.errors?.length) {
+        toast.error(errRes.errors[0].msg);
+      } else if (errRes?.message) {
+        toast.error(errRes.message);
+      } else {
+        toast.error("Something went wrong!");
+      }
+    }
+  },
 }));
 
 export default useAuthStore;
