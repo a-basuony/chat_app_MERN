@@ -11,8 +11,8 @@ const App = () => {
 
   useEffect(() => {
     checkAuth()
-    console.log("Auth user:", authUser);
   }, [checkAuth])
+  console.log("Auth user:", authUser);
 
   if(isCheckingAuth) return <PageLoader/>
   return (
