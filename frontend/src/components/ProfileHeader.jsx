@@ -8,26 +8,25 @@ const mouseClickSound= new Audio("/sounds/mouse-click.mp3")
 const ProfileHeader = () => {
   const { logout, authUser, updateProfile } = useAuthStore();
   const { isSoundEnabled, toggleSound } = useChatStore();
+  const [previewImg, setPreviewImg] = useState(null);
 
-  const [selectedImg, setSelectedImg] = useState(null); // ✅ fixed
+  // const [selectedImg, setSelectedImg] = useState(null); // ✅ fixed
   const fileInputRef = useRef(null);
 
-  const handleImageUpload = (e) => {
+  const handleImageUpload = async (e) => {
     const file = e.target.files[0];
-    if (file) {
-      setSelectedImg(URL.createObjectURL(file)); // Optional: preview image
-      const reader = new FileReader()
-      reader.readAsDataURL(file)
-      reader.onloadend = async() => {
-        const base64Image = reader.result;
-        setSelectedImg(base64Image)
-        await updateProfile({ profilePic: base64Image })
-      }
-    }else{
-      return;
-    }
-  };
+    if (!file) return;
 
+    // Preview
+    const reader = new FileReader();
+    reader.onloadend = () => setPreviewImg(reader.result);
+    reader.readAsDataURL(file);
+
+    // Send to backend
+    const formData = new FormData();
+    formData.append("profileImage", file);
+    await updateProfile(formData);
+  };
   return (
      <div className="p-6 border-b border-slate-700/50">
       <div className="flex items-center justify-between">
@@ -39,7 +38,7 @@ const ProfileHeader = () => {
               onClick={() => fileInputRef.current.click()}
             >
               <img
-                src={selectedImg || authUser.profilePic || "/avatar.png"}
+                src={previewImg  || authUser.profileImage || "/avatar.png"}
                 alt="User image"
                 className="size-full object-cover"
               />
