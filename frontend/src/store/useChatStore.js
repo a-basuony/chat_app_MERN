@@ -26,7 +26,7 @@ export const useChatStore = create((set, get) => ({
         set({ isUsersLoading: true });
         try {
             const res = await api.get("/messages");// get all contacts // your backend route
-            set({ allContacts: res.data });
+            set({ allContacts: res.data.data });
         } catch (error) {
             console.log("Error in getAllContacts:", error);
             toast.error(error.response.data.message);
@@ -42,9 +42,24 @@ export const useChatStore = create((set, get) => ({
             set({ chats: res.data });
         } catch (error) {
             console.log("Error in getAllContacts:", error);
-            toast.error(error.response.data.message);
+            toast.error(error.response?.data?.message || "Something went wrong!");
         } finally {
             set({ isUsersLoading: false });
         }2
     },
+    
+
+    getMessagesByUserId: async (userId)=>{
+        set({isMessagesLoading: true})
+        try {
+            const res = await api.get(`/messages/${userId}`); // your backend route
+            set({messages: res.data.data})
+
+        } catch (error) {
+            console.log("Error in getMessagesByUserId:", error);
+            toast.error(error.response.data.message);
+        } finally {
+            set({isMessagesLoading: false})
+        }
+    }
 }))
