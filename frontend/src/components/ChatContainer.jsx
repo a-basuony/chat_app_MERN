@@ -3,23 +3,25 @@ import useAuthStore from './../store/useAuthStore';
 import ChatHeader from './ChatHeader'
 import { useChatStore } from './../store/useChatStore';
 import NoChatHistoryPlaceholder from './NoChatHistoryPlaceholder';
+import MessagesLoadingSkeleton from './MessagesLoadingSkeleton';
+import MessageInput from './MessageInput';
 
 const ChatContainer = () => {
-  const {selectedUser , getMessagesByUserId, messages} = useChatStore()
+  const {selectedUser , getMessagesByUserId, messages, isMessagesLoading} = useChatStore()
   const {authUser} = useAuthStore()
 
   useEffect(() => {
     if(selectedUser) getMessagesByUserId(selectedUser._id)
       console.log(selectedUser)
   }, [selectedUser, getMessagesByUserId])
-  if (!selectedUser) return null; // ✅ safety check
 
   
   return (
     <>
     <ChatHeader/>
+      {/* chat messages */}
     <div className="flex-1 px-6 overflow-y-auto py-8">
-      {messages.length > 0 ? (
+      {messages.length > 0 && !isMessagesLoading ? (
         <div className="max-w-3xl mx-auto space-y-6">
           {messages.map((message) => (
             <div key={message._id}
@@ -30,16 +32,19 @@ const ChatContainer = () => {
                     <img src={message.image} alt={message.text} className='rounded-lg h-48 object-cover'/>
                   )}
                   {message.text && <p className='mt-2'>{message.text}</p>}
+                  <p className="text-xs mt-1 opacity-75 flex items-center gap-1">
+                    {new Date(message.createdAt).toISOString().slice(11, 16)}
+                  </p>
                 </div>
               </div>
           ))}
         </div>
-      ): (
-        <NoChatHistoryPlaceholder name={selectedUser.name} />
+      ): isMessagesLoading ? <MessagesLoadingSkeleton/> :(
+        <NoChatHistoryPlaceholder name={selectedUser?.name} />
       )}
     </div>
-    {/* <ChatMessages/>
-    <ChatInput/> */}
+  {/* chat input */}
+    <MessageInput/>
     </>
   )
 }

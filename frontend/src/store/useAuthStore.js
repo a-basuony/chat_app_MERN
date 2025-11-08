@@ -26,7 +26,7 @@ const useAuthStore = create((set) => ({
     set({ isSigningUP: true });
     try {
       const res = await api.post("/auth/signup", data); // your backend route
-      set({ authUser: res.data, isSigningUP: false });
+set({ authUser: res.data.data.user, isLoggingIn: false });
       toast.success("Account created successfully!");
     } catch (error) {
       console.log("Error in signup:", error);
@@ -49,7 +49,8 @@ const useAuthStore = create((set) => ({
     set({ isLoggingIn: true });
     try {
       const res = await api.post("/auth/login", data); // your backend route
-      set({ authUser: res.data, isLoggingIn: false });
+      set({ authUser: res.data.data.user, isLoggingIn: false });
+
       toast.success("Login successful!");
     } catch (error) {
       console.log("Error in login:", error);

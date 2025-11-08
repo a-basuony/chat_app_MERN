@@ -39,13 +39,13 @@ export const useChatStore = create((set, get) => ({
         set({ isUsersLoading: true });
         try {
             const res = await api.get("/messages/chats"); // your backend route
-            set({ chats: res.data });
+            set({ chats: res.data.data || [] });
         } catch (error) {
             console.log("Error in getAllContacts:", error);
             toast.error(error.response?.data?.message || "Something went wrong!");
         } finally {
             set({ isUsersLoading: false });
-        }2
+        }
     },
     
 
