@@ -34,7 +34,7 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
-app.use(express.json()); // parse Json body
+app.use(express.json({ limit: "5mb"})); // parse Json body
 app.use(express.urlencoded({ extended: true })); // parse urlencoded body
 app.use(cookieParser());
 app.use(cors({ credentials: true, origin: process.env.CLIENT_URL }));

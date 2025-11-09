@@ -61,5 +61,15 @@ export const useChatStore = create((set, get) => ({
         } finally {
             set({isMessagesLoading: false})
         }
+    },
+
+    sendMessage: async(data)=>{
+        const {selectedUser} = get()
+        try {
+            const res = await api.post(`/messages/send/${selectedUser._id}`, data);
+            set({messages: [...get().messages, res.data.data]})
+        } catch (error) {
+            toast.error(error.response?.data?.message || "Something went wrong!");
+        }
     }
 }))
