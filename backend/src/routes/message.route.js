@@ -14,7 +14,7 @@ const upload = require("../middlewares/uploadImageMiddleware");
 router.use(protect);
 // get all contacts
 router.route("/").get(getAllContacts);
-// get chats parteners messages for logged-in user is either sender or receiver
+// get chats partners messages for logged-in user is either sender or receiver
 router.route("/chats").get(getChatPartners);
 // messages between me and another user
 router.route("/:id").get(getMessagesByUserId);

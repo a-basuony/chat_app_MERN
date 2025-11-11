@@ -38,7 +38,6 @@ exports.getMessagesByUserId = expressAsyncHandler(async (req, res, next) => {
     ],
   })
     .sort({ createdAt: 1 })
-    .populate("senderId receiverId");
 
   if (messages.length === 0) {
     return next(new ApiError("No messages found", 404));
@@ -60,8 +59,9 @@ exports.sendMessage = expressAsyncHandler(async (req, res, next) => {
 
   let imageUrl = null;
 
+
   // 1️⃣ Upload image to Cloudinary if provided
-  if (req.file) {
+  if (req.body.image || req.file) {
     try {
       const base64Image = `data:${req.file.mimetype};base64,${req.file.buffer.toString("base64")}`;
       const uploadResponse = await cloudinary.uploader.upload(base64Image, {
@@ -90,7 +90,7 @@ exports.sendMessage = expressAsyncHandler(async (req, res, next) => {
   });
 });
 
-// @desc    Get chat parteners
+// @desc    Get chat partners
 // @route   GET /api/messages/chats
 // @access  Private
 exports.getChatPartners = expressAsyncHandler(async (req, res, next) => {
@@ -115,7 +115,7 @@ exports.getChatPartners = expressAsyncHandler(async (req, res, next) => {
   ];
 
   if (chatPartners.length === 0) {
-    return next(new ApiError("No chat parteners found", 404));
+    return next(new ApiError("No chat partners found", 404));
   }
 
   const filteredChatPartners = await User.find({

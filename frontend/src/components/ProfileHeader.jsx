@@ -1,34 +1,37 @@
-import React, { useRef, useState } from 'react';
-import useAuthStore from '../store/useAuthStore';
-import { useChatStore } from '../store/useChatStore';
-import { LogOutIcon, Volume2Icon, VolumeOffIcon } from 'lucide-react';
+import { useState, useRef } from "react";
+import { LogOutIcon, VolumeOffIcon, Volume2Icon } from "lucide-react";
+import { useAuthStore } from "../store/useAuthStore";
+import { useChatStore } from "../store/useChatStore";
 
-const mouseClickSound= new Audio("/sounds/mouse-click.mp3")
+const mouseClickSound = new Audio("/sounds/mouse-click.mp3");
 
-const ProfileHeader = () => {
+function ProfileHeader() {
   const { logout, authUser, updateProfile } = useAuthStore();
   const { isSoundEnabled, toggleSound } = useChatStore();
-  const [previewImg, setPreviewImg] = useState(null);
+  const [selectedImg, setSelectedImg] = useState(null);
 
-  // const [selectedImg, setSelectedImg] = useState(null); // ✅ fixed
   const fileInputRef = useRef(null);
 
-  const handleImageUpload = async (e) => {
+  const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
-    // Preview
     const reader = new FileReader();
-    reader.onloadend = () => setPreviewImg(reader.result);
     reader.readAsDataURL(file);
+    
 
-    // Send to backend
+    reader.onloadend = async () => {
+      const base64Image = reader.result;
+      setSelectedImg(base64Image);
+         // Send to backend
     const formData = new FormData();
     formData.append("profileImage", file);
-    await updateProfile(formData);
+      await updateProfile(formData);
+    };
   };
+
   return (
-     <div className="p-6 border-b border-slate-700/50">
+    <div className="p-6 border-b border-slate-700/50">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           {/* AVATAR */}
@@ -38,7 +41,7 @@ const ProfileHeader = () => {
               onClick={() => fileInputRef.current.click()}
             >
               <img
-                src={previewImg  || authUser.profileImage || "/avatar.png"}
+                src={selectedImg || authUser.profileImage || "/avatar.png"}
                 alt="User image"
                 className="size-full object-cover"
               />
@@ -96,6 +99,5 @@ const ProfileHeader = () => {
       </div>
     </div>
   );
-};
-
+}
 export default ProfileHeader;
