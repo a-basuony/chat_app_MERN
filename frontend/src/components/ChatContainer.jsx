@@ -19,11 +19,11 @@ function ChatContainer() {
   }, [selectedUser, getMessagesByUserId]);
 
   // ✅ Auto-scroll when new messages appear
-  useEffect(() => {
-    if (messageEndRef.current) {
-      messageEndRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  }, [messages]);
+  // useEffect(() => {
+  //   if (messageEndRef.current) {
+  //     messageEndRef.current.scrollIntoView({ behavior: "smooth" });
+  //   }
+  // }, [messages]);
 
   // ✅ Helper function to safely format dates
   const formatTime = (dateString) => {

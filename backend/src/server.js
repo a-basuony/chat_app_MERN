@@ -12,10 +12,11 @@ const {
   globalError,
   notFound,
 } = require("./middlewares/globalErrorMiddleware");
+const { app, serverSocket } = require("./config/socket");
 
 dotenv.config();
 
-const app = express();
+// const app = express();
 const PORT = process.env.PORT || 8000;
 // Create rate limiter
 const limiter = rateLimit({
@@ -56,7 +57,7 @@ let server;
 
 connectDB()
   .then(() => {
-    server = app.listen(PORT, () =>
+    server = serverSocket.listen(PORT, () =>
       console.log(`🚀 Server running on port ${PORT}`)
     );
   })
