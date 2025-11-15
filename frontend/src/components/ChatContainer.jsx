@@ -7,7 +7,14 @@ import MessageInput from "./MessageInput";
 import MessagesLoadingSkeleton from "./MessagesLoadingSkeleton";
 
 function ChatContainer() {
-  const { selectedUser, getMessagesByUserId, messages, isMessagesLoading } = useChatStore();
+  const { 
+    selectedUser, 
+    getMessagesByUserId, 
+    messages, 
+    isMessagesLoading , 
+    subscribeToMessages, 
+    unsubscribeFromMessages
+  } = useChatStore();
   const { authUser } = useAuthStore();
   const messageEndRef = useRef(null);
 
@@ -15,15 +22,18 @@ function ChatContainer() {
   useEffect(() => {
     if (selectedUser?._id) {
       getMessagesByUserId(selectedUser._id);
-    }
-  }, [selectedUser, getMessagesByUserId]);
+      subscribeToMessages();
+    } 
+    //clean up
+    return () => unsubscribeFromMessages();
+  }, [selectedUser, getMessagesByUserId, subscribeToMessages, unsubscribeFromMessages]);
 
   // ✅ Auto-scroll when new messages appear
-  // useEffect(() => {
-  //   if (messageEndRef.current) {
-  //     messageEndRef.current.scrollIntoView({ behavior: "smooth" });
-  //   }
-  // }, [messages]);
+  useEffect(() => {
+    if (messageEndRef.current) {
+      messageEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
 
   // ✅ Helper function to safely format dates
   const formatTime = (dateString) => {
@@ -70,7 +80,7 @@ function ChatContainer() {
               </div>
             ))}
             {/* 👇 scroll target */}
-            <div ref={messageEndRef} />
+            {/* <div className="h-1 w-1" ref={messageEndRef} /> */}
           </div>
         ) : isMessagesLoading ? (
           <MessagesLoadingSkeleton />

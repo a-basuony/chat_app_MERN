@@ -4,6 +4,8 @@ import toast from "react-hot-toast";
 import { useAuthStore } from "./useAuthStore";
 import axiosInstance from "../lib/axios";
 
+const notificationSound = new Audio("/sounds/notification.mp3");
+
 export const useChatStore = create((set, get) => ({
   allContacts: [],
   chats: [],
@@ -125,5 +127,33 @@ export const useChatStore = create((set, get) => ({
     toast.error(error.response?.data?.message || "Failed to send message");
   }
 },
+
+  subscribeToMessages: () =>{
+    const {selectedUser, isSoundEnabled} = get()
+    if(!selectedUser) return
+
+    const socket = useAuthStore.getState().socket;
+
+    socket.on("newMessage" , (newMessage)=>{
+      console.log("📩 New message received:", newMessage);
+
+      // filter out messages that are not for the selected user
+      if(newMessage.senderId !== selectedUser._id) return
+
+      // You can update your chat store directly here, or through a global event bus
+      const currentMessages = get().messages;
+      set({ messages: [...currentMessages, newMessage] });
+
+      if(isSoundEnabled){
+        notificationSound.currentTime = 0;
+        notificationSound.play().catch((error) => console.log("Audio play failed:", error));
+      }
+    })
+  }, 
+
+  unsubscribeFromMessages: () => {
+    const socket = useAuthStore.getState().socket;
+    socket.off("newMessage");
+  },
 
 }));

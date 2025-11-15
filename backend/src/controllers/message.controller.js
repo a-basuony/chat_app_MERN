@@ -5,6 +5,8 @@ const Message = require("../model/message.model");
 const ApiError = require("../utils/ApiError");
 const cloudinary = require("../config/cloudinary");
 
+const {getReceiverSocketId, io} = require("../config/socket");
+
 // @desc    Get all contacts
 // @route   GET /api/messages
 // @access  Private
@@ -75,18 +77,28 @@ exports.sendMessage = expressAsyncHandler(async (req, res, next) => {
   }
 
   // 2️⃣ Create new message
-  const message = await Message.create({
+  const newMessage = await Message.create({
     senderId: myId,
     receiverId: userToChatWithId,
     text,
     image: imageUrl,
   });
+
+  
   // send message (real time using socket.io)
+
+  const receiverSocketId = getReceiverSocketId(userToChatWithId)
+  // if it is online then send message
+  if(receiverSocketId){
+    io.to(receiverSocketId).emit("newMessage", newMessage)
+  }
+
+
   // 3️⃣ Respond
   res.status(201).json({
     status: "success",
     message: "Message sent successfully",
-    data: message,
+    data: newMessage,
   });
 });
 
