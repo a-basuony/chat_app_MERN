@@ -4,9 +4,12 @@ import BorderAnimatedContainer from "../components/BorderAnimatedContainer";
 import { MessageCircleIcon, MailIcon, LoaderIcon, LockIcon } from "lucide-react";
 import { Link } from "react-router";
 
+import { GoogleLogin } from "@react-oauth/google";
+
+
 function LoginPage() {
   const [formData, setFormData] = useState({ email: "", password: "" });
-  const { login, isLoggingIn } = useAuthStore();
+  const { login, isLoggingIn , googleAuth } = useAuthStore();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -76,6 +79,17 @@ function LoginPage() {
                   <Link to="/signup" className="auth-link">
                     Don't have an account? Sign Up
                   </Link>
+                </div>
+                <div className="mt-6 flex flex-col justify-center items-center  text-center">
+                    <p className="text-slate-400 mb-3">or continue with</p>
+                 <GoogleLogin
+                  onSuccess={(credentialResponse) => {
+                    const googleToken = credentialResponse.credential;
+                    googleAuth(googleToken);
+                  }}
+                  onError={() => console.log("Google login failed")}
+                  
+                    />
                 </div>
               </div>
             </div>

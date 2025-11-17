@@ -42,7 +42,11 @@ exports.getMessagesByUserId = expressAsyncHandler(async (req, res, next) => {
     .sort({ createdAt: 1 })
 
   if (messages.length === 0) {
-    return next(new ApiError("No messages found", 404));
+    return res.status(200).json({
+        status: "success",
+        data: [],
+        message: "No messages yet",
+    }); 
   }
 
   res.status(200).json({
@@ -113,8 +117,11 @@ exports.getChatPartners = expressAsyncHandler(async (req, res, next) => {
     $or: [{ senderId: myId }, { receiverId: myId }],
   });
   if (messages.length === 0) {
-    return next(new ApiError("No messages found", 404));
-  }
+ return res.status(200).json({
+        status: "success",
+        data: [],
+        message: "No messages yet",
+    });  }
 
   const chatPartners = [
     ...new Set(

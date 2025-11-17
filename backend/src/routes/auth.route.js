@@ -5,6 +5,7 @@ const {
   signup,
   updateProfile,
   checkAuth,
+  googleAuth,
 } = require("../controllers/auth.controller");
 const {
   signupValidator,
@@ -29,6 +30,8 @@ router.put(
 );
 
 router.get("/check", protectRoute.protect,checkAuth);
+
+router.post("/google", googleAuth);
 
 // router.put("/update-password", protectRoute.protect, updatePassword);
 

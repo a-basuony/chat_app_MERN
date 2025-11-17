@@ -1,4 +1,12 @@
 const expressAsyncHandler = require("express-async-handler");
+
+const {OAuth2Client} = require("google-auth-library")
+const jwt = require("jsonwebtoken")
+const crypto = require("crypto");
+
+
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+
 const ApiError = require("../utils/ApiError");
 const User = require("../model/user.model");
 const createToken = require("../utils/createToken");
@@ -7,6 +15,7 @@ const {
   sendWelcomeEmail,
   sendLoginNotificationEmail,
 } = require("../emails/emailHandlers");
+const { upsertStreamUser } = require("../config/stream");
 
 // @desc    Signup user
 // @route   POST /api/auth/signup
@@ -20,6 +29,20 @@ exports.signup = expressAsyncHandler(async (req, res, next) => {
   if (!user) {
     return next(new ApiError("Signup failed : User not found", 404));
   }
+
+  // stream user
+  try {
+    
+    await upsertStreamUser({
+      id: user._id.toString(),
+      name: user.name,
+      email: user.email,
+      profileImage: user.profileImage || "", 
+    })
+    console.log("Stream user created for:", user.name);
+  } catch (error) {
+    console.log("❌ Stream user creation failed:", error.message);
+  } 
 
   // 2. Create token
   const token = createToken(user._id, res);
@@ -102,6 +125,8 @@ exports.checkAuth = (req, res) => {
 };
 
 
+
+
 // @desc    Logout user
 // @route   POST /api/auth/logout
 // @access  Public
@@ -120,7 +145,7 @@ exports.logout = (req, res, next) => {
 // @access  Private
 exports.updateProfile = expressAsyncHandler(async (req, res, next) => {
   const userId = req.user._id;
-  const { name, email, phone } = req.body;
+  const { name, email, phone, bio } = req.body;
 
   // ✅ Convert file buffer to base64 (for Cloudinary)
   const profileImage =
@@ -137,6 +162,7 @@ exports.updateProfile = expressAsyncHandler(async (req, res, next) => {
   if (name) user.name = name;
   if (email) user.email = email;
   if (phone) user.phone = phone;
+  if (bio) user.bio = bio;
 
   console.log("Uploading image...", profileImage ? "✅ found" : "❌ missing");
 
@@ -168,6 +194,14 @@ exports.updateProfile = expressAsyncHandler(async (req, res, next) => {
   // 4️⃣ Save updated user
   await user.save();
 
+  //TODO: update stream user
+  try {
+    await upsertStreamUser({id: user._id.toString(), name: user.name, email: user.email, profileImage: user.profileImage || ""});
+    console.log("Stream user updated for:", user.name);
+  } catch (error) {
+    console.log("❌ Stream user update failed:", error.message);
+  }
+  
   // 5️⃣ Respond to client
   res.status(200).json({
     status: "success",
@@ -177,7 +211,69 @@ exports.updateProfile = expressAsyncHandler(async (req, res, next) => {
       name: user.name,
       email: user.email,
       phone: user.phone,
+      bio: user.bio,
       profileImage: user.profileImage,
     },
   });
 });
+
+
+
+exports.googleAuth = async (req, res) => {
+  try {
+    const { token } = req.body;
+
+    // Verify Google token
+    const ticket = await client.verifyIdToken({
+      idToken: token,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+
+    const payload = ticket.getPayload();
+    const { email, name, sub, picture } = payload;
+
+    let user = await User.findOne({ email });
+
+    // If user does NOT exist → create user
+    if (!user) {
+      user = await User.create({
+        name,
+        email,
+        profileImage: picture,
+        googleId: sub,
+        password: crypto.randomBytes(20).toString("hex"), // safe
+      });
+    }
+
+
+    // Generate our JWT
+    const appToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "7d",
+    });
+
+    // Set cookie
+    res.cookie("jwt", appToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+
+    return res.status(200).json({
+      message: "Login successful",
+      status: "success",
+      data: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        profileImage: user.profileImage, // Google photo
+      },
+      token: appToken,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(400).json({ message: "Google token verification failed" });
+  }
+};
+
+

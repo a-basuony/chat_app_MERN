@@ -18,7 +18,7 @@ function App() {
   if (isCheckingAuth) return <PageLoader />;
 
   return (
-    <div className="min-h-screen bg-slate-900 relative flex items-center justify-center p-4 overflow-hidden">
+    <div className="min-h-screen bg-slate-900 relative flex items-center justify-center p-4 overflow-hidden" data-theme="forest">
             {/* --- DECORATIVE GRID BACKGROUND --- */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#3f3f3f1a_1px,transparent_1px),linear-gradient(to_bottom,#3f3f3f1a_1px,transparent_1px)] bg-[size:24px_24px]" />
 

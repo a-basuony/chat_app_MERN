@@ -3,16 +3,19 @@ import { useAuthStore } from "../store/useAuthStore";
 import BorderAnimatedContainer from "../components/BorderAnimatedContainer";
 import { MessageCircleIcon, LockIcon, MailIcon, UserIcon, LoaderIcon } from "lucide-react";
 import { Link } from "react-router";
+import { GoogleLogin } from "@react-oauth/google";
+
 
 function SignUpPage() {
   const [formData, setFormData] = useState({ name: "", email: "", password: "" , confirmPassword: ""});
-  const { signup, isSigningUp } = useAuthStore();
+  const { signup, isSigningUp, googleAuth } = useAuthStore();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     signup(formData);
   };
 
+  // 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
   return (
     <div className="w-full flex items-center justify-center p-4 bg-slate-900">
       <div className="relative w-full max-w-6xl md:h-[800px] h-[650px]">
@@ -108,6 +111,18 @@ function SignUpPage() {
                   <Link to="/login" className="auth-link">
                     Already have an account? Login
                   </Link>
+                </div>
+
+                <div className="mt-6 flex flex-col justify-center items-center  text-center">
+                    <p className="text-slate-400 mb-3">or continue with</p>
+                 <GoogleLogin
+                  onSuccess={(credentialResponse) => {
+                    const googleToken = credentialResponse.credential;
+                    googleAuth(googleToken);
+                  }}
+                  onError={() => console.log("Google login failed")}
+                  
+                    />
                 </div>
               </div>
             </div>

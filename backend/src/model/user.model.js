@@ -28,6 +28,11 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
+    bio: {
+      type: String,
+      default: "I'm a new user",
+    },
+    
   },
   {
     timestamps: true,
